@@ -1,0 +1,64 @@
+.screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .display {
+    background-color: blue;
+    height: 380px;
+  }
+
+  .buttons {
+    margin-top: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    button {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      path {
+        fill: #7d7e80;
+      }
+      &:hover path {
+        fill: #abacaf;
+      }
+      &:active path {
+        fill: #fafafa;
+      }
+    }
+    .activeTabs {
+      svg {
+        width: 20px;
+        height: 50px;
+        transform: scaleX(-1.1) scaleY(0.8);
+      }
+    }
+    .home {
+      width: 60px;
+      height: 25px;
+      border-radius: 70px/100px;
+      background: linear-gradient(180deg, #444547, #2f3032);
+      border: 2px solid #969698;
+      outline: 2px solid rgb(40, 40, 40);
+
+      &:active {
+        border: 2px solid #707070;
+        background: linear-gradient(90deg, #353535, #3e3e3e);
+      }
+    }
+    .back {
+      svg {
+        width: 20px;
+        height: 50px;
+        transform: scaleX(-1.25) scaleY(0.8);
+      }
+    }
+  }
+}

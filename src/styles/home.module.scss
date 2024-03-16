@@ -1,0 +1,86 @@
+.homePage {
+  background: linear-gradient(45deg, rgb(60, 135, 192), rgb(45, 147, 118));
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  * {
+    user-select: none;
+  }
+
+  .mobile {
+    background: linear-gradient(120deg, #5c5c5c 1%, #202021);
+    border: 4px solid #919193;
+    border-left-color: #898989;
+    border-bottom-color: #898989;
+    outline: 2px solid #161619;
+    width: 300px;
+    height: 525px;
+    border-radius: 3rem;
+    position: relative;
+    overflow: hidden;
+
+    .fade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #202021;
+      filter: blur(100px);
+    }
+
+    .device {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .speaker {
+        width: 60px;
+        height: 8px;
+        background-color: red;
+        margin-top: 1.5rem;
+        border-radius: 2rem;
+        background: linear-gradient(90deg, #d1d1d1 90%, #acacae);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5px;
+
+        .dot {
+          background-color: black;
+          width: 4px;
+          height: 4px;
+          border-radius: 100%;
+        }
+      }
+
+      .logo {
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        svg {
+          height: 80px;
+          fill: #9e9fa4;
+        }
+      }
+
+      .screenContainer {
+        width: 85%;
+        height: 95%;
+        margin-top: 0.5rem;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+    }
+  }
+}
