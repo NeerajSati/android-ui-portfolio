@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
+import clsx from "clsx";
 import Styles from "../styles/screen.module.scss";
 
-function OverlayApp({ url }) {
+function OverlayApp({ url, whiteBg }) {
   useEffect(() => {}, []);
   return (
-    <div className={`${Styles.overlayApp}`}>
+    <div
+      className={clsx(Styles.overlayApp, {
+        [Styles.whiteBg]: whiteBg,
+      })}
+    >
       <div className="">
         <iframe
           width="388"

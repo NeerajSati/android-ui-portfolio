@@ -11,8 +11,11 @@ import { ReactComponent as GameIcon } from "../assets/Game.svg";
 import { ReactComponent as BlogIcon } from "../assets/Blog.svg";
 import { ReactComponent as MessagingIcon } from "../assets/Messaging2.svg";
 import { ReactComponent as ContactsIcon } from "../assets/Contacts.svg";
+import { ReactComponent as AboutIcon } from "../assets/About.svg";
+import { ReactComponent as GalleryIcon } from "../assets/Gallery.svg";
 import OverlayApp from "./OverlayApp";
 import OverlaySocials from "./OverlaySocials";
+import OverlayGallery from "./OverlayGallery";
 
 function Screen() {
   const [time, setTime] = useState(getTime);
@@ -44,12 +47,23 @@ function Screen() {
         return <OverlayApp url="https://google-clone-neeraj.netlify.app/" />;
       case "memorizer":
         return <OverlayApp url="https://neerajsati.github.io/memorizer/" />;
-      case "detective":
-        return <OverlayApp url="https://neerajsati.github.io/detective/" />;
+      case "blogspot":
+        return (
+          <OverlayApp url="https://node-blogspot-neeraj.netlify.app/" whiteBg />
+        );
       case "chat":
         return <OverlayApp url="https://chat-room-neeraj.netlify.app/" />;
+      case "portfolio":
+        return (
+          <OverlayApp
+            url="https://neeraj-sati-portfolio.netlify.app/"
+            whiteBg
+          />
+        );
       case "socials":
         return <OverlaySocials />;
+      case "gallery":
+        return <OverlayGallery />;
       default:
         return "";
     }
@@ -86,6 +100,20 @@ function Screen() {
             <MicIcon />
           </div>
         </button>
+        <div className={Styles.appsContainer}>
+          <button
+            className={Styles.appIcon}
+            onClick={() => handleScreenChange("portfolio", 50)}
+          >
+            <AboutIcon />
+          </button>
+          <button
+            className={Styles.appIcon}
+            onClick={() => handleScreenChange("gallery", 50)}
+          >
+            <GalleryIcon />
+          </button>
+        </div>
         <div className={Styles.bottomBar}>
           <button
             className={Styles.appIcon}
@@ -95,7 +123,7 @@ function Screen() {
           </button>
           <button
             className={clsx(Styles.appIcon, Styles.consoleIcon)}
-            onClick={() => handleScreenChange("detective", 50)}
+            onClick={() => handleScreenChange("blogspot", 50)}
           >
             <BlogIcon />
           </button>

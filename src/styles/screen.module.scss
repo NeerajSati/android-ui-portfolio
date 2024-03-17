@@ -111,8 +111,16 @@
       }
     }
   }
-  .bottomBar {
+  .appsContainer {
     margin-top: auto;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .bottomBar {
     background-color: rgba(0, 0, 0, 0.246);
     height: 60px;
     display: flex;
@@ -370,4 +378,136 @@
       }
     }
   }
+}
+
+.overlayGallery {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+
+  .header {
+    background: linear-gradient(180deg, #2b608b, #1f435e);
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      flex: none;
+
+      path:first-of-type {
+        fill: black !important;
+      }
+
+      path {
+        fill: #c9c9c9 !important;
+      }
+    }
+
+    > div {
+      height: calc(100% - 3px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-bottom: 3px;
+      cursor: pointer;
+      color: #9db6d0d1;
+      min-width: 70px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .selected {
+      color: #f4f4f4d2;
+      font-weight: 600;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 50px;
+        height: 4px;
+        background-color: #96b8cd;
+      }
+    }
+
+    .socialIcon {
+      &::before {
+        content: "";
+        position: absolute;
+        left: -50%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 30px;
+        background-color: #96b8cd73;
+      }
+    }
+  }
+
+  .subHeader {
+    background-color: #292e34;
+    color: #7f8892;
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .galleryContent {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 1rem;
+
+    &Section {
+      width: 45%;
+      text-align: center;
+    }
+
+    .imageContainer {
+      width: 100%;
+      background-color: #f6f8fff4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+
+      svg {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .react {
+      path {
+        fill: #53c1de !important;
+      }
+    }
+    .mongo {
+      svg {
+        width: unset;
+        height: unset;
+        transform: scale(0.8);
+        flex: none;
+      }
+    }
+  }
+}
+
+.whiteBg {
+  background-color: rgb(255, 255, 255);
 }
