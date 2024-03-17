@@ -12,6 +12,7 @@
     border: 2px solid rgb(36, 36, 36);
     display: flex;
     flex-direction: column;
+    position: relative;
   }
   .wallpaper2 {
     background: url("../assets/Wallpaper2.jpg");
@@ -50,10 +51,125 @@
       }
     }
   }
+  .googleBar {
+    background-color: #fefcfc;
+    background: linear-gradient(180deg, #fefcfc, #e9ece9);
+    height: 40px;
+    margin: 10px 5px;
+    padding: 0 5px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    align-items: center;
+    outline: none;
+    border: none;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(180deg, #91adeb, #6171bc);
+      border-radius: 2px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+        0 6px 15px 0 rgba(0, 0, 0, 0.19);
+
+      svg {
+        width: 20px;
+        height: 20px;
+        transform: scale(0.8);
+        fill: #edf5ff;
+      }
+    }
+    .search {
+      width: 100%;
+      height: 30px;
+      margin: 0 5px;
+      background: linear-gradient(180deg, #e9ece9, #fefcfc);
+      border-radius: 2px;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.227) inset;
+      color: #aaaaaa;
+      font-family: serif;
+      font-size: 16px;
+    }
+    .mic {
+      flex: none;
+      width: 25px;
+      height: 25px;
+      background: linear-gradient(180deg, #e9ece9, #fefcfc);
+      border-radius: 4px;
+      border: 2px solid rgba(0, 0, 0, 0.227);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: #727272;
+      }
+    }
+  }
   .bottomBar {
     margin-top: auto;
     background-color: rgba(0, 0, 0, 0.246);
     height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .appIcon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    flex: none;
+    -webkit-tap-highlight-color: transparent;
+
+    svg {
+      width: 40px;
+      height: 40px;
+      flex: none;
+    }
+  }
+
+  .messageIcon {
+    polygon {
+      fill: #f4f4f4 !important;
+    }
+    polygon:first-of-type {
+      fill: #fcc404 !important;
+    }
+    path {
+      fill: #808080 !important;
+    }
+    g > g > path {
+      fill: #f4f4f4 !important;
+    }
+  }
+
+  .contactsIcon {
+    background: linear-gradient(180deg, #fc6f1f, #d52125);
+    border: 2px solid #fff5eb;
+
+    svg {
+      width: 30px;
+      path {
+        fill: none;
+      }
+      path:first-of-type {
+        fill: #f4f4f4d2;
+      }
+    }
   }
 
   .buttons {
@@ -97,7 +213,7 @@
       outline: 2px solid rgb(40, 40, 40);
 
       &:active {
-        border: 2px solid #707070;
+        border: 2px solid rgb(233, 233, 233);
         background: linear-gradient(90deg, #353535, #3e3e3e);
       }
     }
@@ -106,6 +222,151 @@
         width: 20px;
         height: 50px;
         transform: scaleX(-1.25) scaleY(0.8);
+      }
+    }
+  }
+}
+
+.overlayApp {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  iframe {
+    transform: scale(0.65);
+  }
+}
+.overlaySocials {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 30, 30);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+
+  .header {
+    background: linear-gradient(180deg, #2b608b, #1f435e);
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    > div {
+      height: calc(100% - 3px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-bottom: 3px;
+      cursor: pointer;
+      color: #9db6d0d1;
+      min-width: 70px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+      flex: none;
+
+      path {
+        fill: none;
+      }
+
+      path:first-of-type {
+        fill: #96b8cd;
+      }
+    }
+
+    .selected {
+      color: #f4f4f4d2;
+      font-weight: 600;
+
+      svg {
+        path:first-of-type {
+          fill: #f4f4f4d2;
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 50px;
+        height: 4px;
+        background-color: #96b8cd;
+      }
+    }
+    .socialIcon {
+      &::before {
+        content: "";
+        position: absolute;
+        left: -50%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2px;
+        height: 30px;
+        background-color: #96b8cd73;
+      }
+    }
+  }
+
+  .subHeader {
+    background-color: #292e34;
+    color: #7f8892;
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .profileContent {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+
+    .profileId {
+      background-color: #00000045;
+      flex-direction: row;
+      align-items: center;
+      display: flex;
+      height: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 1px solid #ffffff2e;
+      padding-left: 10px;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+      span {
+        color: #a8a8a8;
+        font-weight: 500;
+        margin-left: 10px;
+      }
+
+      &Small {
+        svg {
+          height: 30px;
+        }
+      }
+      &White {
+        svg {
+          fill: rgb(255, 255, 196);
+        }
+      }
+      &Scaled {
+        svg {
+          transform: scaleX(0.7) scaleY(0.9);
+        }
       }
     }
   }

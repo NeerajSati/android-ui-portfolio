@@ -1,13 +1,32 @@
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 import Styles from "./../styles/screen.module.scss";
 import { ReactComponent as BackIcon } from "../assets/Back.svg";
 import { ReactComponent as ActiveTabs } from "../assets/ActiveTabs.svg";
 import { ReactComponent as BatteryIcon } from "../assets/Battery.svg";
 import { ReactComponent as NetworkIcon } from "../assets/Network.svg";
+import { ReactComponent as GoogleGIcon } from "../assets/GoogleG.svg";
+import { ReactComponent as MicIcon } from "../assets/Mic.svg";
+import { ReactComponent as GameIcon } from "../assets/Game.svg";
+import { ReactComponent as BlogIcon } from "../assets/Blog.svg";
+import { ReactComponent as MessagingIcon } from "../assets/Messaging2.svg";
+import { ReactComponent as ContactsIcon } from "../assets/Contacts.svg";
+import OverlayApp from "./OverlayApp";
+import OverlaySocials from "./OverlaySocials";
 
 function Screen() {
   const [time, setTime] = useState(getTime);
+  const [openScreen, setOpenScreen] = useState("");
+  console.log(openScreen);
 
+  const handleScreenChange = (screen, strength) => {
+    if (strength && "vibrate" in navigator) {
+      navigator.vibrate(strength);
+    }
+    setTimeout(() => {
+      setOpenScreen(screen);
+    }, 200);
+  };
   function getTime() {
     const date = new Date();
     let hours = date.getHours();
@@ -18,6 +37,23 @@ function Screen() {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     return hours + ":" + minutes + " " + ampm;
   }
+
+  const getActiveScreen = (screen) => {
+    switch (screen) {
+      case "google":
+        return <OverlayApp url="https://google-clone-neeraj.netlify.app/" />;
+      case "memorizer":
+        return <OverlayApp url="https://neerajsati.github.io/memorizer/" />;
+      case "detective":
+        return <OverlayApp url="https://neerajsati.github.io/detective/" />;
+      case "chat":
+        return <OverlayApp url="https://chat-room-neeraj.netlify.app/" />;
+      case "socials":
+        return <OverlaySocials />;
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     setInterval(() => {
@@ -38,20 +74,61 @@ function Screen() {
           </span>
           <span>{time}</span>
         </div>
-        <div className={Styles.bottomBar}></div>
+        <button
+          className={Styles.googleBar}
+          onClick={() => handleScreenChange("google", 50)}
+        >
+          <div className={Styles.icon}>
+            <GoogleGIcon />
+          </div>
+          <div className={Styles.search}> Google</div>
+          <div className={Styles.mic}>
+            <MicIcon />
+          </div>
+        </button>
+        <div className={Styles.bottomBar}>
+          <button
+            className={Styles.appIcon}
+            onClick={() => handleScreenChange("memorizer", 50)}
+          >
+            <GameIcon />
+          </button>
+          <button
+            className={clsx(Styles.appIcon, Styles.consoleIcon)}
+            onClick={() => handleScreenChange("detective", 50)}
+          >
+            <BlogIcon />
+          </button>
+          <button
+            className={clsx(Styles.appIcon, Styles.contactsIcon)}
+            onClick={() => handleScreenChange("socials", 50)}
+          >
+            <ContactsIcon />
+          </button>
+          <button
+            className={clsx(Styles.appIcon, Styles.messageIcon)}
+            onClick={() => handleScreenChange("chat", 50)}
+          >
+            <MessagingIcon />
+          </button>
+        </div>
+        {getActiveScreen(openScreen)}
       </div>
       <div className={Styles.buttons}>
         <button
           className={Styles.activeTabs}
-          onClick={() => navigator.vibrate(50)}
+          onClick={() => handleScreenChange("", 50)}
         >
           <ActiveTabs />
         </button>
         <button
           className={Styles.home}
-          onClick={() => navigator.vibrate(100)}
+          onClick={() => handleScreenChange("", 100)}
         ></button>
-        <button className={Styles.back} onClick={() => navigator.vibrate(50)}>
+        <button
+          className={Styles.back}
+          onClick={() => handleScreenChange("", 50)}
+        >
           <BackIcon />
         </button>
       </div>
