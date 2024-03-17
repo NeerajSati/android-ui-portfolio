@@ -16,18 +16,25 @@ import { ReactComponent as GalleryIcon } from "../assets/Gallery.svg";
 import OverlayApp from "./OverlayApp";
 import OverlaySocials from "./OverlaySocials";
 import OverlayGallery from "./OverlayGallery";
+import RecentsOverlay from "./RecentsOverlay";
 
 function Screen() {
   const [time, setTime] = useState(getTime);
+  const [recents, setRecents] = useState([]);
   const [openScreen, setOpenScreen] = useState("");
-  console.log(openScreen);
+  const [showRecents, setShowRecents] = useState(false);
 
   const handleScreenChange = (screen, strength) => {
+    setShowRecents(false);
     if (strength && "vibrate" in navigator) {
       navigator.vibrate(strength);
     }
     setTimeout(() => {
       setOpenScreen(screen);
+      if (screen) {
+        let allData = recents.filter((app) => app !== screen);
+        setRecents([screen, ...allData]);
+      }
     }, 200);
   };
   function getTime() {
@@ -92,7 +99,7 @@ function Screen() {
           className={Styles.googleBar}
           onClick={() => handleScreenChange("google", 50)}
         >
-          <div className={Styles.icon}>
+          <div className={clsx(Styles.googleIcon, Styles.googleIconSmall)}>
             <GoogleGIcon />
           </div>
           <div className={Styles.search}> Google</div>
@@ -141,11 +148,18 @@ function Screen() {
           </button>
         </div>
         {getActiveScreen(openScreen)}
+        {showRecents && (
+          <RecentsOverlay
+            setShowRecents={setShowRecents}
+            recents={recents}
+            handleScreenChange={handleScreenChange}
+          />
+        )}
       </div>
       <div className={Styles.buttons}>
         <button
           className={Styles.activeTabs}
-          onClick={() => handleScreenChange("", 50)}
+          onClick={() => setShowRecents(!showRecents)}
         >
           <ActiveTabs />
         </button>
