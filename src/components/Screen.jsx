@@ -13,6 +13,7 @@ import { ReactComponent as MessagingIcon } from "../assets/Messaging2.svg";
 import { ReactComponent as ContactsIcon } from "../assets/Contacts.svg";
 import { ReactComponent as AboutIcon } from "../assets/About.svg";
 import { ReactComponent as GalleryIcon } from "../assets/Gallery.svg";
+import { ReactComponent as TetrisIcon } from "../assets/Tetris.svg";
 import OverlayApp from "./OverlayApp";
 import OverlaySocials from "./OverlaySocials";
 import OverlayGallery from "./OverlayGallery";
@@ -60,6 +61,10 @@ function Screen() {
         );
       case "chat":
         return <OverlayApp url="https://chat-room-neeraj.netlify.app/" />;
+      case "tetris":
+        return (
+          <OverlayApp url="https://tetris-by-neeraj.netlify.app/" whiteBg />
+        );
       case "portfolio":
         return (
           <OverlayApp
@@ -76,11 +81,51 @@ function Screen() {
     }
   };
 
+  const listedHomeApps = [
+    {
+      name: "portfolio",
+      icon: <AboutIcon />,
+    },
+    {
+      name: "tetris",
+      icon: <TetrisIcon />,
+      customClass: Styles.tetrisIcon,
+    },
+    {
+      name: "gallery",
+      icon: <GalleryIcon />,
+    },
+  ];
+
+  const listedPopularApps = [
+    {
+      name: "memorizer",
+      icon: <GameIcon />,
+    },
+    {
+      name: "blogspot",
+      icon: <BlogIcon />,
+      customClass: Styles.consoleIcon,
+    },
+    {
+      name: "socials",
+      icon: <ContactsIcon />,
+      customClass: Styles.contactsIcon,
+    },
+    {
+      name: "chat",
+      icon: <MessagingIcon />,
+      customClass: Styles.messageIcon,
+    },
+  ];
+
   useEffect(() => {
-    setInterval(() => {
+    const clock = setInterval(() => {
       const newTime = getTime();
       if (newTime !== time) setTime(newTime);
     }, 15000);
+
+    return () => clearInterval(clock);
   }, []);
 
   return (
@@ -108,44 +153,26 @@ function Screen() {
           </div>
         </button>
         <div className={Styles.appsContainer}>
-          <button
-            className={Styles.appIcon}
-            onClick={() => handleScreenChange("portfolio", 50)}
-          >
-            <AboutIcon />
-          </button>
-          <button
-            className={Styles.appIcon}
-            onClick={() => handleScreenChange("gallery", 50)}
-          >
-            <GalleryIcon />
-          </button>
+          {listedHomeApps.map((app) => (
+            <button
+              key={app.name}
+              className={clsx(Styles.appIcon, app.customClass)}
+              onClick={() => handleScreenChange(app.name, 50)}
+            >
+              {app.icon}
+            </button>
+          ))}
         </div>
         <div className={Styles.bottomBar}>
-          <button
-            className={Styles.appIcon}
-            onClick={() => handleScreenChange("memorizer", 50)}
-          >
-            <GameIcon />
-          </button>
-          <button
-            className={clsx(Styles.appIcon, Styles.consoleIcon)}
-            onClick={() => handleScreenChange("blogspot", 50)}
-          >
-            <BlogIcon />
-          </button>
-          <button
-            className={clsx(Styles.appIcon, Styles.contactsIcon)}
-            onClick={() => handleScreenChange("socials", 50)}
-          >
-            <ContactsIcon />
-          </button>
-          <button
-            className={clsx(Styles.appIcon, Styles.messageIcon)}
-            onClick={() => handleScreenChange("chat", 50)}
-          >
-            <MessagingIcon />
-          </button>
+          {listedPopularApps.map((app) => (
+            <button
+              key={app.name}
+              className={clsx(Styles.appIcon, app.customClass)}
+              onClick={() => handleScreenChange(app.name, 50)}
+            >
+              {app.icon}
+            </button>
+          ))}
         </div>
         {getActiveScreen(openScreen)}
         {showRecents && (
